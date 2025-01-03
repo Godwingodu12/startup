@@ -1,0 +1,259 @@
+<html>
+    <head>
+        <link href="../static/web/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+    <!-- shop css -->
+    <link href="../static/web/css/shop.css" type="text/css" rel="stylesheet" media="all">
+    <link href="../static/web/css/flexslider.css" type="text/css" rel="stylesheet" media="all">
+    <link href="../static/web/css/style.css" type="text/css" rel="stylesheet" media="all">
+    <!-- font-awesome icons -->
+    <link href="web/css/fontawesome-all.min.css" rel="stylesheet">
+    <!-- //Custom Theme files -->
+    <!-- online-fonts -->
+    <link href="//fonts.googleapis.com/css?family=Elsie+Swash+Caps:400,900" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
+    <!-- //online-fonts -->
+    </head>
+<body>
+    <form id="payment-form" class="creditly-card-form shopf-sear-headinfo_form" onsubmit="return false;">
+        {% csrf_token %}
+        <section class="payment_w3ls py-5">
+            <div class="container">
+                <div class="privacy about">
+                    <h5 class="head_agileinfo text-center text-capitalize pb-5">
+                        <span>P</span>ayment Details</h5>
+                   
+                    <div class="tab4">
+                        <div class="pay_info">
+                            <div class="row">
+                                <div class="col-md-6 tab-grid">
+                                    <img class="pp-img" style="width:400px" src="../static/web/images/paypal.png" alt="Payment Image">
+                                </div>
+                                <div class="col-md-6">
+                                    <section class="creditly-wrapper payf_wrapper">
+                                        <div class="credit-card-wrapper">
+                                            <div class="first-row form-group">
+                                                
+                                                <!-- Card Holder Name -->
+                                                <div class="form-group">
+                                                    <label class="control-label">Card Holder Name</label>
+                                                    <input class="form-control" pattern="^[a-zA-Z\s]{2,40}$" required title="Enter a valid name" type="text" maxlength="40" name="card-holder-name" placeholder="e.g., John Doe">
+                                                </div>
+                            
+                                                <!-- Card Number -->
+                                                <div class="form-group">
+                                                    <label class="control-label">Card Number</label>
+                                                    <input class="form-control" pattern="^[0-9]{16}$" required title="Enter a valid 16-digit card number" type="text" maxlength="16" name="card-number" placeholder="1234 5678 9012 3456" id="card-number" oninput="detectCardType(this.value)">
+                                                    <small id="card-type" class="text-muted"></small>
+                                                </div>
+                            
+                                                <!-- Expiration Date -->
+                                                <div class="form-group">
+                                                    <label class="control-label">Expiration Date</label>
+                                                    <input class="form-control" pattern="^(0[1-9]|1[0-2])\/([0-9]{2})$" required title="Enter expiration date in MM/YY format" type="text" maxlength="5" name="expiration-date" placeholder="MM/YY">
+                                                </div>
+                            
+                                                <!-- CVV -->
+                                                <div class="form-group">
+                                                    <label class="control-label">CVV</label>
+                                                    <input class="security-code form-control" pattern="^[0-9]{3}$" required title="Enter a valid 3-digit CVV" type="password" maxlength="3" name="cvv" placeholder="123">
+                                                </div>
+                            
+                                                <!-- Amount -->
+                                                <div class="form-group">
+                                                    <label class="control-label">Amount</label>
+                                                    <input class="form-control" pattern="^\d+(\.\d{2})?$" required title="Enter a valid amount" type="text" name="amount" placeholder="e.g., 100.00">
+                                                </div>
+                                                
+                                            </div>
+                            
+                                            <button class="btn btn-primary submit" type="button" onclick="validatePayment()">Proceed Payment</button>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+    
+    <script>
+        function detectCardType(number) {
+            const cardTypeElement = document.getElementById("card-type");
+            if (/^4/.test(number)) {
+                cardTypeElement.textContent = "Visa";
+            } else if (/^5[1-5]/.test(number)) {
+                cardTypeElement.textContent = "MasterCard";
+            } else if (/^3[47]/.test(number)) {
+                cardTypeElement.textContent = "American Express";
+            } else if (/^6(?:011|5)/.test(number)) {
+                cardTypeElement.textContent = "Discover";
+            } else {
+                cardTypeElement.textContent = "";
+            }
+        }
+    
+        function validatePayment() {
+            const form = document.getElementById('payment-form');
+            
+            // Check if all fields are valid
+            if (form.checkValidity()) {
+                // Show payment success popup
+                alert('Payment Successful!');
+            } else {
+                alert('Please fill out all fields correctly.');
+            }
+        }
+    </script>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--//tabs-->
+                </div>
+    
+            </div>
+        </section>
+        <script src="../static/web/js/jquery-2.2.3.min.js"></script>
+        <!-- //js -->
+        <!-- smooth dropdown -->
+        <script>
+            $(document).ready(function () {
+                $('ul li.dropdown').hover(function () {
+                    $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(200);
+                }, function () {
+                    $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(200);
+                });
+            });
+        </script>
+        <!-- //smooth dropdown -->
+        <!-- script for password match -->
+        <script>
+            window.onload = function () {
+                document.getElementById("password1").onchange = validatePassword;
+                document.getElementById("password2").onchange = validatePassword;
+            }
+    
+            function validatePassword() {
+                var pass2 = document.getElementById("password2").value;
+                var pass1 = document.getElementById("password1").value;
+                if (pass1 != pass2)
+                    document.getElementById("password2").setCustomValidity("Passwords Don't Match");
+                else
+                    document.getElementById("password2").setCustomValidity('');
+                //empty string means no validation error
+            }
+        </script>
+        <!-- script for password match -->
+       
+        <!-- cart-js -->
+        <script src="../static/web/js/minicart.js"></script>
+        <script>
+            hub.render();
+    
+            hub.cart.on('new_checkout', function (evt) {
+                var items, len, i;
+    
+                if (this.subtotal() > 0) {
+                    items = this.items();
+    
+                    for (i = 0, len = items.length; i < len; i++) {}
+                }
+            });
+        </script>
+        <!-- //cart-js -->
+        <!-- easy-responsive-tabs -->
+        <script src="../static/web/js/easy-responsive-tabs.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#horizontalTab').easyResponsiveTabs({
+                    type: 'default', //Types: default, vertical, accordion           
+                    width: 'auto', //auto or any width like 600px
+                    fit: true, // 100% fit in a container
+                    closed: 'accordion', // Start closed if in accordion view
+                    activate: function (event) { // Callback function if tab is switched
+                        var $tab = $(this);
+                        var $info = $('#tabInfo');
+                        var $name = $('span', $info);
+                        $name.text($tab.text());
+                        $info.show();
+                    }
+                });
+            });
+        </script>
+        <!-- //easy-responsive-tabs -->
+    
+        <!-- credit-card -->
+        <script src="../static/web/js/creditly.js"></script>
+        <link rel="stylesheet" href="../static/web/css/creditly.css" type="text/css" media="all" />
+    
+        <script>
+            $(function () {
+                var creditly = Creditly.initialize(
+                    '.creditly-wrapper .expiration-month-and-year',
+                    '.creditly-wrapper .credit-card-number',
+                    '.creditly-wrapper .security-code',
+                    '.creditly-wrapper .card-type');
+    
+                $(".creditly-card-form .submit").click(function (e) {
+                    e.preventDefault();
+                    var output = creditly.validate();
+                    if (output) {
+                        // Your validated credit card output
+                        console.log(output);
+                    }
+                });
+            });
+        </script>
+        <!-- //credit-card -->
+        <!-- start-smooth-scrolling -->
+        <script src="../static/web/js/move-top.js"></script>
+        <script src="../static/web/js/easing.js"></script>
+        <script>
+            jQuery(document).ready(function ($) {
+                $(".scroll").click(function (event) {
+                    event.preventDefault();
+    
+                    $('html,body').animate({
+                        scrollTop: $(this.hash).offset().top
+                    }, 1000);
+                });
+            });
+        </script>
+        <!-- //end-smooth-scrolling -->
+        <!-- smooth-scrolling-of-move-up -->
+        <script>
+            $(document).ready(function () {
+                /*
+                var defaults = {
+                    containerID: 'toTop', // fading element id
+                    containerHoverID: 'toTopHover', // fading element hover id
+                    scrollSpeed: 1200,
+                    easingType: 'linear' 
+                };
+                */
+    
+                $().UItoTop({
+                    easingType: 'easeOutQuart'
+                });
+    
+            });
+        </script>
+        <script src="../static/web/js/SmoothScroll.min.js"></script>
+        <!-- //smooth-scrolling-of-move-up -->
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="../static/web/js/bootstrap.js"></script>
+        <!-- //payment -->
+        {% if msg %}
+        <script>
+            alert("{{msg}}")
+            window.location = "/customerorders"
+        </script>
+    {% endif %}
+        </body>
+        </html>

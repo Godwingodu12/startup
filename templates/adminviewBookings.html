@@ -1,0 +1,75 @@
+{% extends "adminBase.html" %} {% block content %}
+ {% if messages %} 
+ {% for message in messages %}
+<script>
+    let i = true;
+    if (i) {
+        alert("{{ message }}");
+        i = false;
+    }
+</script>
+{% endfor %}
+{% endif %}
+<style>
+    table {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    th,
+    td {
+        padding: 10px;
+    }
+
+    table,
+    th,
+    td {
+        border: 1px solid gray;
+    }
+</style>
+
+<section class="w3l-inner-page-breadcrumb">
+    <div class="breadcrumb-bg py-5">
+        <div class="container pt-lg-5 pt-md-3 p-lg-4 pb-md-3 my-lg-3">
+            <h2 class="title pt-5"></h2>
+        </div>
+    </div>
+</section>
+
+<div class="w3l-contact-10" id="contact">
+    <div class="form-41-mian py-lg-5 py-md-4 py-2">
+        <div class="container">
+            <div class="header-title text-center mx-auto">
+                <h6 class="title-subhny mb-1"></h6>
+                <h3 class="title-w3l">My WorkSpaces</h3>
+                <table>
+                    <tr>
+                        <th style="white-space: nowrap">Booked By</th>
+                        <th>Area</th>
+                        <th style="white-space: nowrap">Token Amount</th>
+                        <th>Address</th>
+                        <th>Description</th>
+                        <th>Image</th>
+                    </tr>
+                    {% for d in data %}
+                    <tr>
+                        <td>{{d.sfid.name}}</td>
+                        <td>
+                            <p style="white-space: nowrap">{{d.size}} sq ft</p>
+                        </td>
+                        <td>{{d.price}}</td>
+                        <td>{{d.location}}</td>
+                        <td>{{d.description}}</td>
+                        <td>
+                            <a href="/static/media/{{d.image}}" target="_blank">
+                                <img src="/static/media/{{d.image}}" width="200" alt="" />
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
